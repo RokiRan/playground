@@ -14,18 +14,22 @@ onMounted(() => {
 const moveForward = () => {
   // slider.value.offsetX = 100
   slider.value.scrollBy(400, 0)
-  console.log(slider.value)
 }
 const moveBack = () => {
   // slider.value.offsetX = 100
   slider.value.scrollBy(-400, 0)
-  console.log(slider.value)
+}
+const onDrag = (e: DragEvent) => {
+  // slider.value
+  const deltaLeft = e.clientX - e.target.offsetLeft
+  const deltaTop = e.clientY - e.target.offsetTop
+  console.log(deltaLeft, deltaTop)
 }
 </script>
 
 <template>
   <div>
-    <div ref="slider" flex="~ row" w-100 overflow="hidden" mx-auto transform>
+    <div ref="slider" flex="~ row" w-100 overflow="hidden" mx-auto transform @drag="onDrag">
       <div
         i-carbon-chevron-left
         inline-block pos="fixed top-31"
