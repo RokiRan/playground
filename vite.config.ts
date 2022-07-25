@@ -27,6 +27,11 @@ export default defineConfig({
     Vue({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
+      template: {
+        transformAssetUrls: {
+          MyImg: ['errSrc'], // 这里可以指定特定标签使用模版URL
+        },
+      },
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages

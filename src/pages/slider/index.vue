@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const imgs = ['https://cdn.pixabay.com/photo/2015/01/07/15/51/woman-591576_960_720.jpg', 'https://cdn.pixabay.com/photo/2014/07/31/22/50/photographer-407068_960_720.jpg', 'https://cdn.pixabay.com/photo/2020/02/02/14/03/cat-4813099_960_720.jpg']
 const slider = ref<HTMLDivElement>()
+const slider2 = ref<HTMLDivElement>()
 const isStartDrop = ref(false)
 const startPoint = reactive({ x: 0, y: 0 })
 onMounted(() => {
@@ -36,6 +37,9 @@ const onMouseUp = (e: MouseEvent) => {
   isStartDrop.value = false
   startPoint.x = 0
 }
+const smoothMove = () => {
+  slider2.value!.style.marginLeft = `-${100}px`
+}
 </script>
 
 <template>
@@ -54,6 +58,11 @@ const onMouseUp = (e: MouseEvent) => {
         @click="moveForward"
       />
       <div ref="slider" flex="~ row" w-100 overflow="hidden" mx-auto @mousemove="onDrag" @mousedown="onMouseDown" @mouseup="onMouseUp">
+        <img v-for="img in imgs" :key="img" :src="img" w-100>
+      </div>
+    </div>
+    <div pos="relative" w-100 mx-auto>
+      <div ref="slider2" flex="~ row" w-100 overflow="hidden" mx-auto transition="duration-1500 ease-in-out" @click="smoothMove">
         <img v-for="img in imgs" :key="img" :src="img" w-100>
       </div>
     </div>
