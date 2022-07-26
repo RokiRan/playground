@@ -29,7 +29,7 @@ const allIdeals = [
     <div v-for="item in allIdeals" :key="item.path" b-rounded>
       <router-link :to="item.path">
         <div flex dark:hover="bg-stone-9" light:hover="bg-gray-400" p-2>
-          <div i-carbon-dicom-overlay h-auto text-size-10 />
+          <div h-auto text-size-10 :class="`i-carbon-${item.icon}`" />
           <div ml-3 flex-1 text-left>
             <div text-size-5>
               {{ item.name }}
