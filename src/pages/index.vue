@@ -13,9 +13,9 @@ const allIdeals = [
     icon: 'move',
   },
   {
-    name: 'FiveStars',
+    name: 'Minesweeper',
     path: 'five',
-    desc: '五子棋游戏',
+    desc: '扫雷',
     icon: 'gateway',
   },
 ]

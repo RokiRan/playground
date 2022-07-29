@@ -80,8 +80,8 @@ const init = () => {
   // 计算每个box周围的炸弹数量
   chessBoard.forEach((item) => {
     let num = 0
-    aroundCal(item, (_) => {
-      num += cal(_.x, _.y)
+    aroundCal(item, (res: Chess) => {
+      num += cal(res.x, res.y)
     })
     item.boomsNum = num
   })
@@ -106,7 +106,7 @@ onMounted(() => {
     <div w-160 h-160 mx-auto display="inline-block'" flex="~ wrap">
       <div v-for="box in chessBoard" :key="box.id" inline-block w-8 h-8 @click="openBox(box)" @auxclick="flagBox(box)">
         <div v-if="box.state === ChessState.NUMBER" h-8 w-8 text-5 :class="box.core ? 'c-red' : ''">
-          {{ box.boomsNum !== 0 ? box.boomsNum : ' ' }}
+          {{ box.boomsNum !== 0 ? box.boomsNum : '·' }}
         </div>
         <div v-else-if="box.state === ChessState.HIDDEN" i-carbon-circle-dash h-8 w-8 />
         <div v-else-if="box.state === ChessState.SHOW" i-carbon-face-activated h-8 w-8 />
