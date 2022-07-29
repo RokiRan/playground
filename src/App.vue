@@ -2,6 +2,7 @@
 // https://github.com/vueuse/head
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
+import { StarportCarrier } from 'vue-starport'
 useHead({
   title: '每日操场',
   meta: [
@@ -22,5 +23,7 @@ useHead({
 </script>
 
 <template>
-  <RouterView />
+  <StarportCarrier>
+    <RouterView />
+  </StarportCarrier>
 </template>
