@@ -8,7 +8,7 @@ const router = useRouter()
   <div>
     <div mt-30 overflow="hidden" @click="router.back()">
       <Starport port="user2" style="height:600px;">
-        <Image src="https://cdn.pixabay.com/photo/2022/07/18/19/57/dog-7330712_960_720.jpg" style="filter: blur(.5rem);" />
+        <Image src="https://cdn.pixabay.com/photo/2022/07/25/15/18/cat-7344042_960_720.jpg" style="filter: blur(.5rem);" />
       </Starport>
     </div>
   </div>
