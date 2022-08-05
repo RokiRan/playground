@@ -19,9 +19,9 @@ const allIdeals = [
     icon: 'gateway',
   },
   {
-    name: '组建动画',
+    name: '组件动画',
     path: 'starport',
-    desc: '跨组建动画',
+    desc: '跨组件动画',
     icon: 'gateway',
   },
   {

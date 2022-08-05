@@ -1,5 +1,15 @@
 <script setup lang="ts">
-
+interface Test {
+  name: string
+  age: number
+}
+const person: Test = {
+  name: 'Jack',
+  age: 18,
+}
+Object.keys(person).forEach((key: keyof Test) => {
+  console.log(person[key])
+})
 </script>
 
 <template>
@@ -99,11 +109,13 @@ button{
     font-family: sans-serif;
 }
 a{
-    text-decoration: none;
+    text-decoration: none; // 文字装饰
     font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     background: linear-gradient(-45deg, #ff00c1, #00fff9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text; //  设置元素的背景（背景图片或颜色）是否延伸到边框、内边距盒子、内容盒子下面。
+    // -webkit-text-fill-color: transparent; // 非标准属性 不建议使用
 }
 button::after,
 button::before{
