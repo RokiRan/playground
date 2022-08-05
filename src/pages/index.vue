@@ -18,12 +18,24 @@ const allIdeals = [
     desc: '扫雷',
     icon: 'gateway',
   },
+  {
+    name: '组建动画',
+    path: 'starport',
+    desc: '跨组建动画',
+    icon: 'gateway',
+  },
+  {
+    name: 'CSS 特效',
+    path: 'animation',
+    desc: 'css奇巧淫技',
+    icon: 'gateway',
+  },
 ]
 </script>
 
 <template>
   <h1 text-size-8 w-200 mx-auto text-left mb-7>
-    一些小玩意儿
+    enjoy your self
   </h1>
   <div grid="~ cols-2 gap-2" w-200 mx-auto>
     <div v-for="item in allIdeals" :key="item.path" b-rounded>
