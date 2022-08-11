@@ -7,8 +7,8 @@ const person: Test = {
   name: 'Jack',
   age: 18,
 }
-Object.keys(person).forEach((key: keyof Test) => {
-  console.log(person[key])
+Object.keys(person).forEach((key) => {
+  console.log((<any>person)[key])
 })
 </script>
 
