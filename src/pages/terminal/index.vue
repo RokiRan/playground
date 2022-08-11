@@ -1,10 +1,22 @@
 <script setup lang="ts">
-
+const Audio = ref<HTMLAudioElement>()
+const Video = ref<HTMLVideoElement>()
+onMounted(() => {
+  nextTick(() => {
+    // eslint-disable-next-line no-console
+    console.log('开始播放')
+    Video.value!.play()
+    Audio.value!.play()
+  })
+})
 </script>
 
 <template>
-  <div w-50 h-5>
-    <audio src="http://m801.music.126.net/20220811170308/06f143da92e700e2184bc53f66addfba/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/14364326513/aef1/a99e/d964/04106910b75b93e98341080a9f071f5f.mp3" style="with:100%;height:100%" controls autoplay />
+  <div mt-5>
+    <audio ref="Audio" mx-auto src="/audio/孙伯纶 - 如果你也听说 (选择导师：那英).mp3" w-90vw h-12 controls />
+  </div>
+  <div mt-5>
+    <video ref="Video" mx-auto src="/video/yourName.mp4" w-90vw controls autoplay />
   </div>
 </template>
 

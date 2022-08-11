@@ -1,3 +1,4 @@
+import eruda from 'eruda'
 import { ViteSSG } from 'vite-ssg'
 import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
@@ -8,6 +9,7 @@ import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
 
+eruda.init()
 const routes = setupLayouts(generatedRoutes)
 
 // https://github.com/antfu/vite-ssg
