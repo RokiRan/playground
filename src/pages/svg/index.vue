@@ -1,19 +1,51 @@
 <script lang="ts" setup>
 import { useToggle } from '@vueuse/core'
+import gsap from 'gsap'
 const wheel1 = ref<SVGSVGElement>()
 const wheel2 = ref<SVGSVGElement>()
 const isRun = ref(false)
 const toggleRrn = useToggle(isRun)
 onMounted(() => {
-  wheel1.value?.classList.add('roll')
+  // wheel1.value?.classList.add('roll')
 })
 const tryRun = () => {
+  return
   toggleRrn() ? wheel1.value?.classList.add('roll') : wheel1.value?.classList.remove('roll')
+}
+const toFn = () => {
+  gsap.to('#circle1', {
+    duration: 2,
+    x: 100,
+  })
+}
+const fromFn = () => {
+  gsap.from('#circle1', {
+    duration: 2,
+    x: 100,
+  })
+}
+const timeLineFn = () => {
+  const tl = gsap.timeline({ defaults: { duration: 1 } })
+  tl.to('#circle1', { x: 200 })
+    .to('#circle2', { duration: 3, x: 200, scale: 0.2 })
+    .to('#circle3', { x: 200, scale: 2, y: 20 })
+}
+const sharkCar = () => {
+  const shark = gsap.fromTo('#bodyPart', {
+    x: 1,
+    y: 1,
+    duration: 1,
+  }, {
+    x: -1,
+    y: -1,
+    duration: 1,
+  })
+  shark.repeat(10)
 }
 </script>
 
 <template>
-  <div @click="tryRun">
+  <div flex justify-around @click="tryRun">
     <svg id="svg5" mx-auto width="175" height="100" viewBox="0 0 46.302083 26.458337" version="1.1">
 
       <defs id="defs2">
@@ -25,7 +57,7 @@ const tryRun = () => {
         </filter>
       </defs>
       <g id="layer1" inkscape:label="Layer 1" inkscape:groupmode="layer">
-        <g id="tfront" ref="wheel1" transform="matrix(4.0764314,0,0,4.0764314,-254.34846,-308.48289)">
+        <g id="tFront" ref="wheel1" transform="matrix(4.0764314,0,0,4.0764314,-254.34846,-308.48289)">
           <g id="g1439" transform="matrix(-0.04318356,-0.12389798,0.12389798,-0.04318356,62.569189,95.570023)">
             <circle
               id="path867" style="fill:#000000;stroke-width:0.720335;stroke-linecap:round" cx="86.143036"
@@ -52,7 +84,7 @@ const tryRun = () => {
             >$$$</tspan>
           </text>
         </g>
-        <g id="tback" ref="wheel2" transform="matrix(4.0764314,0,0,4.0764314,-278.31911,-308.15821)">
+        <g id="tBack" ref="wheel2" transform="matrix(4.0764314,0,0,4.0764314,-278.31911,-308.15821)">
           <g id="g6915" transform="matrix(-0.04318356,-0.12389798,0.12389798,-0.04318356,62.569189,95.570023)">
             <circle
               id="circle6909" style="fill:#000000;stroke-width:0.720335;stroke-linecap:round" cx="86.143036"
@@ -79,7 +111,7 @@ const tryRun = () => {
             >$$$</tspan>
           </text>
         </g>
-        <g id="bodypart" transform="translate(0,-0.05112237)">
+        <g id="bodyPart" transform="translate(0,-0.05112237)">
           <animatetransform
             attributeName="transform" attributeType="XML" type="translate" keyTimes="0;0.5;1"
             values="0 -0.05112237; -0.52916663 -0.05112237; 0 -0.05112237" dur="2s" repeatCount="indefinite"
@@ -162,15 +194,46 @@ const tryRun = () => {
         </g>
       </g>
     </svg>
+    <svg>
+      <g fill="none" fill-rule="evenodd" stroke="#9fbde8">
+        <g transform="translate(1 1)" stroke-width="2">
+          <circle id="circle1" cx="5" cy="50" r="5" />
+          <circle id="circle2" cx="27" cy="5" r="5" />
+          <circle id="circle3" cx="49" cy="50" r="5" />
+        </g>
+      </g>
+    </svg>
+    <div w-50>
+      <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+        <rect width="10" height="10">
+          <animate attributeName="rx" values="0;5;0" dur="10s" repeatCount="indefinite" />
+        </rect>
+      </svg>
+    </div>
   </div>
+  <button btn mr-3 @click="toFn">
+    To
+  </button>
+  <button btn mr-3 @click="fromFn">
+    From
+  </button>
+  <button btn mr-3 @click="timeLineFn">
+    TimeLine
+  </button>
+  <button btn @click="sharkCar">
+    SharkCar
+  </button>
 </template>
 
 <style scoped lang='less'>
 .roll {
-  // transform: scale(1);
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  transform: scale(2, 2);
+  // opacity: 0.5;
+  // translate: 10px 10px;
+  // position: absolute;
+  // top: 1rem;
+  // left: 1rem;
   transition-duration: 2s;
+  // background-color: aqua;
 }
 </style>
