@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轮播图</title>
+  <style>
+    html {
+      /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+      -ms-overflow-style: none;
+      /*火狐下隐藏滚动条*/
+      overflow: -moz-scrollbars-none;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    .swiper {
+      width: 800px;
+      height: 340px;
+      background: pink;
+      margin: 0 auto;
+      margin-top: 220px;
+      /* overflow-x: scroll; */
+      /* overflow-y: hidden; */
+      cursor: pointer;
+      position: relative;
+    }
+
+    .swiper-box {
+      /* display: inline-block; */
+      white-space: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory; //移动端自动回弹
+      background: #FFF;
+      font-size: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    .swiper-box div {
+      width: 800px;
+      height: 340px;
+      background-color: aqua;
+      border-right: 1px solid;
+      white-space: nowrap;
+      display: inline-block;
+      scroll-snap-align: start; //移动端自动回弹
+      font-size: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    img {
+      font-size: 0;
+      width: 800px;
+      height: 340px;
+    }
+
+    .span {
+
+      margin: 0 auto;
+      line-height: 20px;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .span span {
+      background: #ccc;
+      width: 10px;
+      height: 10px;
+      margin: 0 10px;
+      border-radius: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="swiper">
+
+
+    <div class="swiper-box" id='swiper-box'>
+      <div>
+        <img src="https://ossweb-img.qq.com/upload/adw/image/20210106/b69ef294c01ea9a5621d966a63ece710.jpeg" alt=""
+          draggable="false">
+      </div>
+      <div>
+        <img src="https://ossweb-img.qq.com/upload/adw/image/20201204/85f83545e9385499f9fd415aef4b675e.jpeg" alt=""
+          draggable="false">
+      </div>
+      <div>
+        <img src="https://ossweb-img.qq.com/upload/adw/image/20201225/a0362928d3a8a8e9b5e0202593e09ffc.jpeg" alt=""
+          draggable="false">
+      </div>
+
+
+    </div>
+    <div class="span" id="span"></div>
+  </div>
+
+
+  <script>
+    const swiper = document.getElementById('swiper-box').getElementsByTagName('div')
+    const dian = document.getElementById('span').getElementsByTagName('span')
+    let px, px2
+    let span = ''
+    let index = 0 // 指示器初始索引
+
+    //     swiper[i].index = i
+    for (let i = 0; i < swiper.length; i++) {
+      span += '<span></span>'
+      swiper[i].index = i
+      swiper[i].onmousedown = function (event) {
+        var event = window.event || ev
+        left = event.clientX * (this.index + 1)
+        px = left
+        console.log(left)
+        // 获取鼠标点击位置
+        document.onmousemove = function (event) { // 鼠标移动
+          var event = window.event || ev
+          lefta = event.clientX - left // 鼠标移动的距离
+          px2 = lefta
+          console.log(lefta)
+          // 随着鼠标拖动滑动
+          for (let i = 0; i < swiper.length; i++)
+            swiper[i].setAttribute('style', `transform:translate3d(${lefta}px, 0px, 0px); transition-duration: 300ms`)
+
+          document.onmouseup = function (event) { // 鼠标抬起
+            var event = window.event || ev
+            document.onmousemove = null
+            document.onmouseup = null
+            // 判断弹回还是下一张
+            if (px2 > -410) {
+              console.log(1111)
+              index = 0
+              for (var i = 0; i < swiper.length; i++)
+
+                swiper[i].setAttribute('style', 'transform:translate3d(0px, 0px, 0px); transition-duration: 300ms')
+            }
+            else if (px2 < -410 && px2 > -1201) {
+              for (var i = 0; i < swiper.length; i++)
+                swiper[i].setAttribute('style', 'transform:translate3d(-800px, 0px, 0px); transition-duration: 300ms')
+
+              index = 1
+            }
+            else {
+              for (var i = 0; i < swiper.length; i++)
+                swiper[i].setAttribute('style', 'transform:translate3d(-1600px, 0px, 0px); transition-duration: 300ms')
+
+              index = 2
+            }
+            // 指示器
+            for (var i = 0; i < dian.length; i++)
+
+              dian[i].style.background = '#ccc'
+
+            dian[index].style.background = '#fff'
+          }
+        }
+      }
+    }
+    // 指示器
+    document.getElementById('span').innerHTML = span
+    document.getElementById('span').getElementsByTagName('span')[index].style.background = '#fff'
+    // h5指示器显示
+    document.getElementById('swiper-box').addEventListener('scroll', function () {
+      console.log(this.scrollLeft)
+      // 获取距离左边距离
+      const idnex = Math.round(this.scrollLeft / 800)
+      for (let i = 0; i < dian.length; i++)
+
+        dian[i].style.background = '#ccc'
+
+      dian[idnex].style.background = '#fff'
+    })
+  </script>
+</body>
+
+</html>
